@@ -39,7 +39,7 @@ public class ConfigurationPropertiesTest {
 	private FieldTableDao fieldTableDao;
 
 	@Test
-	public PageVo test(){
+	public void test(){
 		System.out.println("根据id查询");
 		Company company =  companyDao.selectById(22);
 		System.out.println(company.toString());
@@ -75,7 +75,7 @@ public class ConfigurationPropertiesTest {
 		pageVo.setSize(companyIPage.getSize());
 		pageVo.setTotal(companyIPage.getTotal());
 		pageVo.setOrders(dateMapList);
-		return pageVo;
+		System.out.println(pageVo);
 	}
 	/**
 	 * 设置表格信息
