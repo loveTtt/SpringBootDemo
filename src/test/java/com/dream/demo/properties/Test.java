@@ -4,11 +4,16 @@ package com.dream.demo.properties;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;
-import com.google.common.collect.Lists;
+import com.dream.demo.entity.Company;
+import org.assertj.core.util.Lists;
+import org.springframework.boot.test.util.ApplicationContextTestUtils;
+import org.springframework.context.ApplicationContext;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Test {
 
@@ -31,5 +36,7 @@ public class Test {
         }));
         System.out.println("-------------------分割线------------------");
         data.forEach(item-> System.out.println(item.get("RED")));
+
     }
+
 }
