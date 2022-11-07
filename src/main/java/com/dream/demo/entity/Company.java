@@ -6,17 +6,20 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 /**
  * @author huangys2
  * @date 2022/9/23 16:57
  */
-@Data
 @TableName(value = "company")
+@Data
 public class Company {
 
 
 	@TableId(value = "id",type = IdType.AUTO)
-	private Long id;
+	private String id;
 
 	/**
 	 * 公司名称
@@ -31,4 +34,7 @@ public class Company {
 	 */
 	@TableField(value = "credit_code")
 	private String creditCode;
+
+	@TableField(value = "creat_date")
+	private LocalDateTime createDate;
 }

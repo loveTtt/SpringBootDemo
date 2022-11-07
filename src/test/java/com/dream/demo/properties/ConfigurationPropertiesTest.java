@@ -1,6 +1,10 @@
 package com.dream.demo.properties;
 
+import cn.hutool.core.util.ReflectUtil;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,7 +13,6 @@ import com.dream.demo.entity.Company;
 import com.dream.demo.entity.FieldTable;
 import com.dream.demo.repostory.CompanyDao;
 import com.dream.demo.repostory.FieldTableDao;
-import com.dream.demo.vo.PageVo;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +24,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 /**
@@ -39,43 +41,15 @@ public class ConfigurationPropertiesTest {
 	private FieldTableDao fieldTableDao;
 
 	@Test
-	public void test(){
+	public void test() {
 		System.out.println("根据id查询");
-		Company company =  companyDao.selectById(22);
+		Company company =  companyDao.selectById(1);
 		System.out.println(company.toString());
 		System.out.println("列表查询");
 		List<Company> companyList = companyDao.selectList(Wrappers.<Company>lambdaQuery().eq(Company::getName,"Aaron"));
 		companyList.forEach(company1 -> System.out.println(company1.toString()));
 
-//		System.out.println("聚合函数 ");
-//		QueryWrapper<Company> queryWrapper = new QueryWrapper<>();
-//		queryWrapper.select("name,avg(salary)").between("age",10,30).groupBy("name").having("name = {0}","Mary");
-//		List<Map<String, Object>> listSumMap =  companyDao.selectMaps(queryWrapper);
-//		listSumMap.stream().findFirst().orElse(new HashMap<>()).forEach((name,salary)->{
-//				System.out.println(name);
-//				System.out.println(salary.toString());
-//		});
 
-
-		Page<Company> companyPage = new Page<>(1,10);
-		System.out.println("分页查询");
-		IPage<Company> companyIPage = companyDao.selectPage(companyPage,Wrappers.<Company>lambdaQuery().lt(Company::getId,200));
-		System.out.println(companyIPage.getPages());
-		System.out.println(companyIPage.getTotal());
-		System.out.println(companyIPage.getSize());
-		List<Company> companies = companyIPage.getRecords();
-		List<Object> objects = companies.stream().map(company1 -> (Object) company1).collect(Collectors.toList());
-
-		List<FieldTable> fieldTables = fieldTableDao.selectList(Wrappers.<FieldTable>lambdaQuery().eq(FieldTable::getShow,"1"));
-		List<String> fieldNames = fieldTables.stream().map(FieldTable::getName).collect(Collectors.toList());
-
-		List<Map<String,Object>> dateMapList = dataList(objects,fieldNames);
-		PageVo pageVo = new PageVo();
-		pageVo.setPages(companyIPage.getPages());
-		pageVo.setSize(companyIPage.getSize());
-		pageVo.setTotal(companyIPage.getTotal());
-		pageVo.setOrders(dateMapList);
-		System.out.println(pageVo);
 	}
 	/**
 	 * 设置表格信息
