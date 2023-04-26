@@ -31,7 +31,7 @@ public class ConcurrentHashMapTest {
     private ConcurrentHashMap<String,Long> getData(int count){
         return LongStream.rangeClosed(1,count)
                 .boxed()
-                .collect(Collectors.toConcurrentMap(i-> IdUtil.getSnowflakeNextIdStr(), Function.identity(),
+                .collect(Collectors.toConcurrentMap(i-> IdUtil.getSnowflake().nextIdStr(), Function.identity(),
                         (o1,o2)->o1,ConcurrentHashMap::new));
     }
 
