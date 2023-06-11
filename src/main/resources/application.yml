@@ -2,6 +2,10 @@ server:
   port: 10010
 
 spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: ttt20000608
   datasource:
     url: jdbc:postgresql://49.234.45.25:5432/testuser
     username: postgres
