@@ -19,12 +19,14 @@ public class Company {
 
 
 	@TableId(value = "id",type = IdType.AUTO)
-	private String id;
+	private Integer id;
 
 	/**
 	 * 公司名称
 	 */
 	private String name;
+
+	private long stock;
 	/**
 	 * 公司地址
 	 */
