@@ -12,10 +12,10 @@ spring:
     password: ttt20000608.
     driver-class-name: org.postgresql.Driver
   rabbitmq:
-    username: root
-    password: pinkitec!
+    username: loveT
+    password: ttt20000608
     port: 5672
-    host: mq.server.url
+    host: 192.168.31.128
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
